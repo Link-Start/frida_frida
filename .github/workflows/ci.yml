@@ -9,7 +9,7 @@ env:
 
 jobs:
   publish-prod:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     runs-on: ubuntu-latest
     needs:
       - package-windows
@@ -145,7 +145,7 @@ jobs:
               -d '{"event_type":"build"}'
 
   publish-dev:
-    if: github.ref == 'refs/heads/main'
+    if: false
     runs-on: ubuntu-latest
     needs:
       - frida-windows
@@ -191,6 +191,7 @@ jobs:
           site: development
 
   assemble-ios-assets:
+    if: false
     runs-on: macos-latest
     needs: frida-ios
     steps:
@@ -241,6 +242,7 @@ jobs:
           path: ios-assets/*
 
   assemble-tvos-assets:
+    if: false
     runs-on: macos-latest
     needs: frida-tvos
     steps:
@@ -282,7 +284,7 @@ jobs:
           path: tvos-assets/*
 
   package-apple-universal:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     runs-on: macos-latest
     needs: [frida-macos, frida-ios, frida-watchos, frida-tvos]
     steps:
@@ -450,7 +452,7 @@ jobs:
           path: frida-gadget-tvos-arm64-simulator.dylib.xz
 
   package-windows:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-windows
     strategy:
       matrix:
@@ -499,7 +501,7 @@ jobs:
           name: frida-qml-windows-${{ matrix.arch }}
 
   package-windows-sfx:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-windows
     strategy:
       matrix:
@@ -522,7 +524,7 @@ jobs:
           name: frida-core-devkit-windows-${{ matrix.arch }}
 
   package-macos:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-macos
     strategy:
       matrix:
@@ -567,7 +569,7 @@ jobs:
           name: frida-qml-macos-${{ matrix.arch }}
 
   package-linux:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-linux
     strategy:
       matrix:
@@ -611,7 +613,7 @@ jobs:
           name: frida-qml-linux-${{ matrix.arch }}
 
   package-ios:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-ios
     strategy:
       matrix:
@@ -639,7 +641,7 @@ jobs:
           name: frida-portal-ios-${{ matrix.arch }}
 
   package-watchos:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-watchos
     strategy:
       matrix:
@@ -662,7 +664,7 @@ jobs:
           name: frida-core-devkit-watchos-${{ matrix.arch }}
 
   package-tvos:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-tvos
     strategy:
       matrix:
@@ -685,7 +687,7 @@ jobs:
           name: frida-core-devkit-tvos-${{ matrix.arch }}
 
   package-android:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-android
     strategy:
       matrix:
@@ -724,7 +726,7 @@ jobs:
           name: frida-inject-android-${{ matrix.arch }}
 
   package-qnx:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-qnx
     strategy:
       matrix:
@@ -763,7 +765,7 @@ jobs:
           name: frida-inject-qnx-${{ matrix.arch }}
 
   package-prospero:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-prospero
     runs-on: ubuntu-latest
     steps:
@@ -799,7 +801,7 @@ jobs:
           name: frida-inject-prospero-x86_64
 
   package-none:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-gum-none
     strategy:
       matrix:
@@ -827,7 +829,7 @@ jobs:
           name: frida-gumjs-devkit-${{ matrix.machine }}
 
   package-barebone-agent:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-barebone-agent-blob
     strategy:
       matrix:
@@ -844,7 +846,7 @@ jobs:
           name: frida-barebone-agent-${{ matrix.flavor }}
 
   package-barebone-agent-kext:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: false
     needs: frida-barebone-agent-kext
     runs-on: ubuntu-latest
     steps:
@@ -856,6 +858,7 @@ jobs:
           name: frida-barebone-agent-xnu-kext-arm64e
 
   frida-windows-intel:
+    if: false
     needs: sdk-windows
     strategy:
       matrix:
@@ -1040,6 +1043,7 @@ jobs:
             !*.pdb
 
   frida-windows:
+    if: false
     needs: frida-windows-intel
     runs-on: windows-11-arm
     steps:
@@ -1180,6 +1184,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/prebuilds/*.tar.gz
 
   frida-macos:
+    if: false
     needs: sdk-macos
     strategy:
       matrix:
@@ -1326,6 +1331,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/lib/qml/
 
   frida-linux:
+    if: false
     needs: sdk-linux
     strategy:
       matrix:
@@ -1505,6 +1511,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/lib/qml/
 
   frida-ios:
+    if: false
     needs: [sdk-macos, sdk-ios]
     strategy:
       matrix:
@@ -1603,6 +1610,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/usr/lib/frida-1.0/frida-gadget.dylib
 
   frida-watchos:
+    if: false
     needs: [sdk-macos, sdk-watchos]
     strategy:
       matrix:
@@ -1658,6 +1666,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/lib/frida-1.0/frida-gadget.dylib
 
   frida-tvos:
+    if: false
     needs: [sdk-macos, sdk-tvos]
     strategy:
       matrix:
@@ -1747,6 +1756,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/usr/lib/frida-1.0/frida-gadget.dylib
 
   frida-android:
+    if: false
     needs: [sdk-linux, sdk-android-32, sdk-android-64]
     strategy:
       matrix:
@@ -1838,6 +1848,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/lib/frida-1.0/64/frida-gadget.so
 
   frida-qnx:
+    if: false
     runs-on: ubuntu-latest
     needs: sdk-linux
     container: ghcr.io/frida/qnx-tools:latest
@@ -1907,6 +1918,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/lib/frida-1.0/32/frida-gadget.so
 
   frida-prospero:
+    if: false
     runs-on: ubuntu-latest
     needs: sdk-prospero
     steps:
@@ -1984,6 +1996,7 @@ jobs:
           path: ${{ env.FRIDA_PREFIX }}/lib/frida-1.0/64/frida-gadget.so
 
   frida-gum-none:
+    if: false
     needs: sdk-none
     strategy:
       matrix:
@@ -2061,6 +2074,7 @@ jobs:
         run: releng/deps.py roll sdk macos-arm64e-kernel --activate
 
   frida-gum-macos-kernel:
+    if: false
     needs: sdk-macos-kernel
     runs-on: macos-latest
     steps:
@@ -2100,6 +2114,7 @@ jobs:
           path: subprojects/frida-gum/build/bindings/gumjs/devkit/
 
   frida-barebone-agent-kext:
+    if: false
     needs: frida-gum-macos-kernel
     runs-on: macos-latest
     steps:
@@ -2139,6 +2154,7 @@ jobs:
           path: subprojects/frida-core/src/barebone/agent/macos/frida-agent.kext
 
   frida-barebone-agent-blob:
+    if: false
     needs: frida-gum-none
     strategy:
       matrix:
@@ -2250,6 +2266,7 @@ jobs:
   # the exact GKI build it was made for, since vermagic names it verbatim, so the
   # kernel half is left to whoever has that kernel.
   frida-barebone-agent-linux:
+    if: false
     needs: frida-gum-none
     strategy:
       matrix:
